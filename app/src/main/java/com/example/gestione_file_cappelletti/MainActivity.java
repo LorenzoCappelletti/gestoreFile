@@ -20,23 +20,20 @@ public class MainActivity extends AppCompatActivity
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         testo_nome_file = (EditText) findViewById(R.id.titolo);
         btnScrivere = (Button) findViewById(R.id.btnScrivere);
         btnLeggere = (Button) findViewById(R.id.btnLeggere);
-        testo = (TextView)findViewById(R.id.textView);
+        testo = (TextView) findViewById(R.id.textView);
 
         ges = new gestoreFile(testo_nome_file.getText().toString());
 
-        btnScrivere.setOnClickListener(new View.OnClickListener()
-        {
+        btnScrivere.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View v)
-            {
+            public void onClick(View v) {
                 String esito = ges.scriviFile("prova.txt", getApplicationContext());
                 Toast.makeText(getApplicationContext(), esito, Toast.LENGTH_SHORT).show();
             }

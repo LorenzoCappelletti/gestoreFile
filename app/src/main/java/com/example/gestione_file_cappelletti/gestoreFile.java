@@ -10,12 +10,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * @author
+ * @see
+ */
 public class gestoreFile
 {
     private String nome_file;
     Context c;
     StringBuilder sb; // variabile di istanza
 
+    /**
+     *
+     * @param nome_file
+     */
     public gestoreFile(String nome_file)
     {
         this.nome_file = nome_file;
@@ -24,10 +32,10 @@ public class gestoreFile
 
     public StringBuilder leggiFile(String nome_file, Context c)
     {
-
+        String inputString;
         try
         {
-            String inputString;
+
             BufferedReader inputReader = new BufferedReader(new InputStreamReader(c.openFileInput(nome_file)));
             while((inputString = inputReader.readLine()) != null)
             {
@@ -38,6 +46,7 @@ public class gestoreFile
         catch (FileNotFoundException e) // se il file non esiste genera un errore
         {
             Log.e("Errore", "Errore file non esistente");
+            //return sb.append("errore file non esistente");
         }
 
         catch (IOException e) // è la classe madre delle eccezioni e va messo sempre sotto il primo catch
