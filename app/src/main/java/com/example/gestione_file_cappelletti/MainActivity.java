@@ -20,7 +20,8 @@ public class MainActivity extends AppCompatActivity
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -31,9 +32,11 @@ public class MainActivity extends AppCompatActivity
 
         ges = new gestoreFile(testo_nome_file.getText().toString());
 
-        btnScrivere.setOnClickListener(new View.OnClickListener() {
+        btnScrivere.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 String esito = ges.scriviFile("prova.txt", getApplicationContext());
                 Toast.makeText(getApplicationContext(), esito, Toast.LENGTH_SHORT).show();
             }
@@ -48,6 +51,10 @@ public class MainActivity extends AppCompatActivity
                 StringBuilder stringaletta = ges.leggiFile("prova.txt", getApplicationContext());
                 String stringa = stringaletta.toString();
                 testo.setText(stringa);
+
+                //String stringaletta = ges.leggiFileRaw(getApplicationContext()); // serve solo il contesto poichè il nome lo riprende da la
+                //testo.setText(stringaletta);
+
             }
         });
     }

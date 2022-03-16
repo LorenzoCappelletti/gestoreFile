@@ -1,14 +1,18 @@
 package com.example.gestione_file_cappelletti;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ResourceBundle;
 
 /**
  * @author
@@ -79,4 +83,53 @@ public class gestoreFile
         }
         return esito;
     }
+
+    public String leggiFileRaw(Context c)
+    {
+        String testo = "";
+        Resources res = c.getResources();// prendere le risorse del contesto. Nel gestore si hanno tutte le risorse della mainActivity
+        InputStream is = res.openRawResource(R.raw.brani);//inputStream deve aprire le risorse raw.
+        // prima si va nella cartella resources res e poi si entra in quella raw
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(is)); // leggere una riga tramite BufferedReader, tramite il BufferedReader apriamo il file
+        try // si mettono eccezioni per il readLine
+        {
+            while((testo = br.readLine()) != null)
+            {
+                sb.append(testo);
+            }
+        }
+        catch (IOException e)
+        {
+            Log.e("errore", "errore in lettura");
+        }
+
+        return sb.toString();
+    }
+
+    public String leggiFileAssets()
+    {
+        String testo = " ";
+        AssetManager am = c.getAssets(); // gestore degli assets
+        try
+        {
+            //apertura viene messa dentro il try perchè non viene passato l'id, ma il nome che potrà essere digitato in modo errato
+            InputStream is = am.open("lyrics.txt");
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            while((testo = br.readLine()) != null)
+            {
+                sb.append(testo);
+            }
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return sb.toString();
+
+    }
+
+
 }
